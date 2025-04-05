@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from 'vue'
-import { useAlienClockStore } from '../stores/alienClock'
-import { useEarthClockStore } from '../stores/earthClock'
-import { useAlarmStore } from '../stores/alarmStore'
-import DefaultLayout from '../components/layouts/DefaultLayout.vue'
+import { useAlienClockStore } from '@/stores/alienClock'
+import { useEarthClockStore } from '@/stores/earthClock'
+import { useAlarmStore } from '@/stores/alarmStore'
+import DefaultLayout from '@/components/layouts/DefaultLayout.vue'
 
 const alienClockStore = useAlienClockStore()
 const earthClockStore = useEarthClockStore()

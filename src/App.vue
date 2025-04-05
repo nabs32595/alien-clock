@@ -9,13 +9,6 @@ import { RouterView } from 'vue-router'
 </template>
 
 <style>
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden;
-}
 .app-container {
   height: 100vh;
   width: 100vw;

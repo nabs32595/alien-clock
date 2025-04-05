@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import SpaceBackground from '../organisms/SpaceBackground.vue'
-import BottomNavigation from '../organisms/BottomNavigation.vue'
+import SpaceBackground from '@/components/organisms/SpaceBackground.vue'
+import BottomNavigation from '@/components/organisms/BottomNavigation.vue'
 </script>
 
 <style scoped>

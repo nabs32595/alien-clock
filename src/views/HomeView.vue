@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import TimeDisplay from '@/components/organisms/TimeDisplay.vue'
-import DateDisplay from '@/components/organisms/DateDisplay.vue'
-import SpaceBackground from '@/components/organisms/SpaceBackground.vue'
+import TimeUnit from '@/components/molecules/TimeUnit.vue'
+import TimeSeparator from '@/components/atoms/TimeSeparator.vue'
+import Card from '@/components/molecules/Card.vue'
+import DefaultLayout from '@/components/layouts/DefaultLayout.vue'
 import { useAlienClockStore } from '@/stores/alienClock'
+import { useEarthClockStore } from '@/stores/earthClock'
 import { useWindowSize } from '@/composables/useWindowSize'
 
 // Animation control
 const showTitle = ref(false)
-const showDate = ref(false)
-const showTime = ref(false)
+const showDateTime = ref(false)
 
-// Store
+// Stores
 const alienClockStore = useAlienClockStore()
+const earthClockStore = useEarthClockStore()
 
 // Window size
 const { width, height } = useWindowSize()
@@ -24,64 +26,127 @@ const titleSize = computed(() => {
   return 'normal'
 })
 
-// Expose clock data
-const year = computed(() => alienClockStore.year)
-const month = computed(() => alienClockStore.month)
-const day = computed(() => alienClockStore.day)
-const hour = computed(() => alienClockStore.hour)
-const minute = computed(() => alienClockStore.minute)
-const second = computed(() => alienClockStore.second)
-const daysInMonth = computed(() => alienClockStore.daysInCurrentMonth)
+// Responsive size for time units
+const responsiveSize = computed(() => {
+  if (width.value < 640) {
+    return 'sm'
+  } else if (width.value < 1024) {
+    return 'md'
+  }
+  return 'lg'
+})
 
-// Start the clock on mount
+// Expose alien clock data
+const alienYear = computed(() => alienClockStore.year)
+const alienMonth = computed(() => alienClockStore.month)
+const alienDay = computed(() => alienClockStore.day)
+const alienHour = computed(() => alienClockStore.hour)
+const alienMinute = computed(() => alienClockStore.minute)
+const alienSecond = computed(() => alienClockStore.second)
+const alienDaysInMonth = computed(() => alienClockStore.daysInCurrentMonth)
+
+// Expose earth clock data
+const earthYear = computed(() => earthClockStore.year)
+const earthDay = computed(() => earthClockStore.day)
+const earthHour = computed(() => earthClockStore.hour)
+const earthMinute = computed(() => earthClockStore.minute)
+const earthSecond = computed(() => earthClockStore.second)
+const earthMonthName = computed(() => earthClockStore.monthName)
+
+// Start the clocks on mount
 onMounted(() => {
   alienClockStore.startClock()
+  earthClockStore.startClock()
 
   // Staggered animations
   setTimeout(() => {
     showTitle.value = true
   }, 300)
+
   setTimeout(() => {
-    showDate.value = true
+    showDateTime.value = true
   }, 800)
-  setTimeout(() => {
-    showTime.value = true
-  }, 1300)
 })
 </script>
 
 <template>
-  <main class="home-view">
-    <!-- Space background component -->
-    <SpaceBackground />
+  <DefaultLayout>
+    <main class="home-view">
+      <div class="clock-container">
+        <Transition name="fade">
+          <div v-if="showTitle" class="title-area" :class="titleSize">
+            <h1 class="title">Galactic Clock</h1>
+          </div>
+        </Transition>
 
-    <div class="clock-container">
-      <Transition name="fade">
-        <div v-if="showTitle" class="title-area" :class="titleSize">
-          <h1 class="title">Alien Clock</h1>
-        </div>
-      </Transition>
+        <Transition name="slide-up">
+          <div class="datetime-area" v-if="showDateTime">
+            <!-- Alien Time Card -->
+            <Card class="mb-4">
+              <h2 class="card-title">Alien Time</h2>
+              <div class="datetime-content">
+                <!-- Date section -->
+                <div class="date-section">
+                  <div class="date-info">
+                    <span class="date-value">
+                      <span class="emoji">👽</span> Month {{ alienMonth }} {{ alienDay }},
+                      {{ alienYear }}
+                      <span class="text-indigo-300 text-xs ml-2"
+                        >({{ alienDaysInMonth }} days/month)</span
+                      >
+                    </span>
+                  </div>
+                </div>
 
-      <Transition name="slide-up">
-        <div class="date-area" v-if="showDate">
-          <DateDisplay :year="year" :month="month" :day="day" :daysInMonth="daysInMonth" />
-        </div>
-      </Transition>
+                <!-- Time section -->
+                <div class="time-section">
+                  <div class="flex items-center justify-center flex-wrap gap-2">
+                    <TimeUnit :value="alienHour" label="Hour" :size="responsiveSize" />
+                    <TimeSeparator :size="responsiveSize" />
+                    <TimeUnit :value="alienMinute" label="Minute" :size="responsiveSize" />
+                    <TimeSeparator :size="responsiveSize" />
+                    <TimeUnit :value="alienSecond" label="Second" :size="responsiveSize" />
+                  </div>
+                </div>
+              </div>
+            </Card>
 
-      <Transition name="slide-up">
-        <div class="time-area" v-if="showTime">
-          <TimeDisplay :hour="hour" :minute="minute" :second="second" size="lg" />
-        </div>
-      </Transition>
-    </div>
-  </main>
+            <!-- Earth Time Card -->
+            <Card>
+              <h2 class="card-title">Earth Time</h2>
+              <div class="datetime-content">
+                <!-- Date section -->
+                <div class="date-section">
+                  <div class="date-info">
+                    <span class="date-value">
+                      <span class="emoji">🌎</span> {{ earthMonthName }} {{ earthDay }},
+                      {{ earthYear }}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Time section -->
+                <div class="time-section">
+                  <div class="flex items-center justify-center flex-wrap gap-2">
+                    <TimeUnit :value="earthHour" label="Hour" :size="responsiveSize" />
+                    <TimeSeparator :size="responsiveSize" />
+                    <TimeUnit :value="earthMinute" label="Minute" :size="responsiveSize" />
+                    <TimeSeparator :size="responsiveSize" />
+                    <TimeUnit :value="earthSecond" label="Second" :size="responsiveSize" />
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </Transition>
+      </div>
+    </main>
+  </DefaultLayout>
 </template>
 
 <style scoped>
 .home-view {
-  @apply min-h-screen flex items-center justify-center overflow-hidden relative p-4 w-full h-screen pb-20;
-  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-  padding-bottom: 4rem; /* Space for bottom navigation */
+  @apply min-h-screen flex items-center justify-center overflow-hidden relative p-4 w-full h-screen;
 }
 
 .clock-container {
@@ -98,12 +163,37 @@ onMounted(() => {
   text-shadow: 0 0 15px rgba(165, 180, 252, 0.5);
 }
 
-.date-area {
-  @apply mb-4 md:mb-6 w-full px-2;
+.card-title {
+  @apply text-xl text-indigo-100 mb-3 font-semibold;
 }
 
-.time-area {
-  @apply mb-6 md:mb-8 w-full px-2;
+.datetime-area {
+  @apply w-full px-2;
+}
+
+.datetime-content {
+  @apply flex flex-row flex-wrap gap-4 justify-between;
+}
+
+.date-section {
+  @apply flex flex-col w-full sm:w-2/5;
+  border-bottom: none;
+  border-right: 1px solid rgba(165, 180, 252, 0.2);
+  padding-right: 1rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.date-info {
+  @apply flex items-center gap-2 py-1;
+}
+
+.date-value {
+  @apply text-indigo-100 font-mono text-base sm:text-lg font-bold;
+}
+
+.time-section {
+  @apply w-full sm:w-1/2 flex items-center justify-center;
 }
 
 /* Compact mode for small heights */
@@ -111,30 +201,34 @@ onMounted(() => {
   @apply text-xl;
 }
 
-.small .title {
-  @apply text-2xl;
-}
-
-/* Transitions */
+/* Animations */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-  transform: translateY(-20px);
 }
 
 .slide-up-enter-active,
 .slide-up-leave-active {
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: all 0.5s ease-out;
 }
 
 .slide-up-enter-from,
 .slide-up-leave-to {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(30px);
+}
+
+/* Small mode for narrow screens */
+.small .title {
+  @apply text-2xl;
+}
+
+.emoji {
+  @apply mr-1;
 }
 </style>

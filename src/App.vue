@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import BottomNavigation from '@/components/organisms/BottomNavigation.vue'
 </script>
 
 <template>
   <div class="app-container">
     <RouterView />
-    <BottomNavigation />
   </div>
 </template>
 

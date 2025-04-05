@@ -12,7 +12,7 @@ import UnitLabel from '@/components/atoms/UnitLabel.vue';
 interface Props {
   value: number;
   label: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   pulse?: boolean;
 }
 
@@ -24,6 +24,6 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped>
 .time-unit {
-  @apply flex flex-col items-center gap-1;
+  @apply flex flex-col items-center gap-0.5 sm:gap-1;
 }
 </style>

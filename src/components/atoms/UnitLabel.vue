@@ -7,7 +7,7 @@
 <script setup lang="ts">
 interface Props {
   label: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 }
 
 withDefaults(defineProps<Props>(), {
@@ -18,6 +18,10 @@ withDefaults(defineProps<Props>(), {
 <style scoped>
 .unit-label {
   @apply text-indigo-300 text-center font-semibold;
+}
+
+.xs {
+  @apply text-[10px];
 }
 
 .sm {

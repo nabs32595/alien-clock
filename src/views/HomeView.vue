@@ -28,7 +28,9 @@ const titleSize = computed(() => {
 
 // Responsive size for time units
 const responsiveSize = computed(() => {
-  if (width.value < 640) {
+  if (width.value < 480) {
+    return 'xs'
+  } else if (width.value < 640) {
     return 'sm'
   } else if (width.value < 1024) {
     return 'md'
@@ -82,7 +84,7 @@ onMounted(() => {
         <Transition name="slide-up">
           <div class="datetime-area" v-if="showDateTime">
             <!-- Alien Time Card -->
-            <Card class="mb-4">
+            <Card class="mb-3 md:mb-4">
               <h2 class="card-title">Alien Time</h2>
               <div class="datetime-content">
                 <!-- Date section -->
@@ -91,7 +93,7 @@ onMounted(() => {
                     <span class="date-value">
                       <span class="emoji">👽</span> Month {{ alienMonth }} {{ alienDay }},
                       {{ alienYear }}
-                      <span class="text-indigo-300 text-xs ml-2"
+                      <span class="text-indigo-300 text-xs ml-1 md:ml-2"
                         >({{ alienDaysInMonth }} days/month)</span
                       >
                     </span>
@@ -100,7 +102,7 @@ onMounted(() => {
 
                 <!-- Time section -->
                 <div class="time-section">
-                  <div class="flex items-center justify-center flex-wrap gap-2">
+                  <div class="flex items-center justify-center flex-wrap gap-1 sm:gap-2">
                     <TimeUnit :value="alienHour" label="Hour" :size="responsiveSize" />
                     <TimeSeparator :size="responsiveSize" />
                     <TimeUnit :value="alienMinute" label="Minute" :size="responsiveSize" />
@@ -127,7 +129,7 @@ onMounted(() => {
 
                 <!-- Time section -->
                 <div class="time-section">
-                  <div class="flex items-center justify-center flex-wrap gap-2">
+                  <div class="flex items-center justify-center flex-wrap gap-1 sm:gap-2">
                     <TimeUnit :value="earthHour" label="Hour" :size="responsiveSize" />
                     <TimeSeparator :size="responsiveSize" />
                     <TimeUnit :value="earthMinute" label="Minute" :size="responsiveSize" />
@@ -146,50 +148,57 @@ onMounted(() => {
 
 <style scoped>
 .home-view {
-  @apply min-h-screen flex items-center justify-center overflow-hidden relative p-4 w-full h-screen;
+  @apply min-h-screen flex items-start justify-center overflow-visible relative p-1.5 sm:p-4 w-full pt-3 sm:pt-4;
 }
 
 .clock-container {
-  @apply flex flex-col items-center justify-center h-full w-full max-w-2xl mx-auto;
+  @apply flex flex-col items-center justify-center w-full max-w-2xl mx-auto py-0 sm:py-2;
   z-index: 1;
 }
 
 .title-area {
-  @apply text-center mb-4 md:mb-6;
+  @apply text-center mb-2 sm:mb-4 md:mb-6;
 }
 
 .title {
-  @apply text-3xl md:text-4xl lg:text-5xl font-bold text-indigo-200 tracking-wider;
+  @apply text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-indigo-200 tracking-wider;
   text-shadow: 0 0 15px rgba(165, 180, 252, 0.5);
 }
 
 .card-title {
-  @apply text-xl text-indigo-100 mb-3 font-semibold;
+  @apply text-base sm:text-xl text-indigo-100 mb-1 sm:mb-3 font-semibold;
 }
 
 .datetime-area {
-  @apply w-full px-2;
+  @apply w-full px-1 sm:px-2 flex flex-col items-center;
 }
 
 .datetime-content {
-  @apply flex flex-row flex-wrap gap-4 justify-between;
+  @apply flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 justify-center;
 }
 
 .date-section {
-  @apply flex flex-col w-full sm:w-2/5;
-  border-bottom: none;
-  border-right: 1px solid rgba(165, 180, 252, 0.2);
-  padding-right: 1rem;
-  padding-bottom: 0;
-  margin-bottom: 0;
+  @apply flex flex-col w-full sm:w-2/5 items-center;
+  border-bottom: 1px solid rgba(165, 180, 252, 0.2);
+  border-right: none;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.25rem;
+
+  @screen sm {
+    border-bottom: none;
+    border-right: 1px solid rgba(165, 180, 252, 0.2);
+    padding-right: 1rem;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
 }
 
 .date-info {
-  @apply flex items-center gap-2 py-1;
+  @apply flex items-center justify-center gap-1 sm:gap-2 py-0.5 sm:py-1;
 }
 
 .date-value {
-  @apply text-indigo-100 font-mono text-base sm:text-lg font-bold;
+  @apply text-indigo-100 font-mono text-xs sm:text-base md:text-lg font-bold text-center;
 }
 
 .time-section {
@@ -198,7 +207,16 @@ onMounted(() => {
 
 /* Compact mode for small heights */
 .compact .title {
+  @apply text-lg;
+}
+
+/* Small mode for narrow screens */
+.small .title {
   @apply text-xl;
+}
+
+.emoji {
+  @apply mr-1;
 }
 
 /* Animations */
@@ -221,14 +239,5 @@ onMounted(() => {
 .slide-up-leave-to {
   opacity: 0;
   transform: translateY(30px);
-}
-
-/* Small mode for narrow screens */
-.small .title {
-  @apply text-2xl;
-}
-
-.emoji {
-  @apply mr-1;
 }
 </style>

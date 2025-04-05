@@ -20,12 +20,13 @@ import BottomNavigation from '@/components/organisms/BottomNavigation.vue'
 
 <style scoped>
 .layout-container {
-  @apply min-h-screen w-full h-screen relative overflow-hidden;
+  @apply min-h-screen w-full relative;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
 }
 
 .content-area {
-  @apply w-full h-full overflow-hidden;
-  padding-bottom: 4rem; /* Space for bottom navigation */
+  @apply w-full pb-14 sm:pb-16;
+  /* For iOS momentum scrolling */
+  -webkit-overflow-scrolling: touch;
 }
 </style>

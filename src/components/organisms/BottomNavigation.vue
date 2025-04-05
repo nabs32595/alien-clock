@@ -13,28 +13,32 @@ const isActive = (routeName: string) => {
   <nav class="bottom-nav">
     <router-link to="/" class="nav-item" :class="{ active: isActive('home').value }">
       <div class="icon">🕙</div>
-      <span>Clock</span>
+      <span class="nav-label">Clock</span>
     </router-link>
 
     <router-link to="/alarm" class="nav-item" :class="{ active: isActive('alarm').value }">
       <div class="icon">🔔</div>
-      <span>Alarm</span>
+      <span class="nav-label">Alarm</span>
     </router-link>
 
     <router-link to="/settings" class="nav-item" :class="{ active: isActive('settings').value }">
       <div class="icon">⚙️</div>
-      <span>Settings</span>
+      <span class="nav-label">Settings</span>
     </router-link>
   </nav>
 </template>
 
 <style scoped>
 .bottom-nav {
-  @apply fixed bottom-4 left-8 right-8 h-16 bg-indigo-950/90 backdrop-blur-md flex justify-around items-center z-50 border-t border-indigo-800 rounded-2xl shadow-lg;
+  @apply fixed bottom-1 sm:bottom-4 left-1 right-1 sm:left-8 sm:right-8 h-12 sm:h-16
+    bg-indigo-950/90 backdrop-blur-md flex justify-around items-center z-50
+    border-t border-indigo-800 rounded-xl sm:rounded-2xl shadow-lg;
 }
 
 .nav-item {
-  @apply flex flex-col items-center justify-center w-full h-full text-indigo-400 transition-all duration-300 ease-in-out relative;
+  @apply flex flex-col items-center justify-center w-full h-full text-indigo-400
+    transition-all duration-300 ease-in-out relative py-0.5 sm:py-1;
+  min-height: 44px; /* Minimum touch target size */
 }
 
 .nav-item.active {
@@ -43,12 +47,12 @@ const isActive = (routeName: string) => {
 
 .nav-item.active::after {
   content: '';
-  @apply absolute bottom-0 w-1/2 h-1 bg-indigo-400 rounded-t-full;
+  @apply absolute bottom-0 w-1/3 sm:w-1/2 h-1 bg-indigo-400 rounded-t-full;
   animation: fadeIn 0.3s ease-in-out;
 }
 
 .icon {
-  @apply mb-1 transition-transform duration-300 text-2xl;
+  @apply transition-transform duration-300 text-xl sm:text-2xl;
 }
 
 .nav-item.active .icon {
@@ -56,8 +60,13 @@ const isActive = (routeName: string) => {
   animation: bounce 0.5s ease;
 }
 
-.nav-item span {
-  @apply text-xs transition-opacity duration-300;
+.nav-label {
+  @apply text-xs transition-opacity duration-300 mt-0.5;
+  font-size: 0.65rem;
+
+  @screen sm {
+    font-size: 0.75rem;
+  }
 }
 
 @keyframes fadeIn {

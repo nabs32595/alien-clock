@@ -9,7 +9,7 @@ import { computed } from 'vue';
 
 interface Props {
   value: number;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   padZero?: boolean;
   minLength?: number;
   pulse?: boolean;
@@ -31,6 +31,10 @@ const formattedValue = computed(() => {
 <style scoped>
 .digit-display {
   @apply bg-indigo-800 text-indigo-200 rounded-lg shadow-md flex items-center justify-center font-mono;
+}
+
+.xs {
+  @apply text-base px-1.5 py-0.5;
 }
 
 .sm {

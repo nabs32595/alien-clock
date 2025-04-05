@@ -128,7 +128,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .alarm-view {
-  @apply min-h-screen flex flex-col items-center justify-center w-full p-3;
+  @apply min-h-screen flex flex-col items-center justify-center w-full p-2 sm:p-3;
 }
 
 .alarm-content {
@@ -136,11 +136,11 @@ onBeforeUnmount(() => {
 }
 
 .header-section {
-  @apply flex justify-center gap-3 mb-4 w-full;
+  @apply flex justify-center gap-2 sm:gap-3 mb-3 sm:mb-4 w-full;
 }
 
 .time-display {
-  @apply flex items-center justify-center px-3 py-2 rounded-lg text-white font-mono text-center;
+  @apply flex items-center justify-center px-2 sm:px-3 py-2 rounded-lg text-white font-mono text-center;
   backdrop-filter: blur(5px);
 }
 
@@ -157,17 +157,17 @@ onBeforeUnmount(() => {
 }
 
 .compact-container {
-  @apply flex flex-col items-center w-full bg-indigo-950/40 p-4 rounded-xl backdrop-blur-md;
+  @apply flex flex-col items-center w-full bg-indigo-950/40 p-3 sm:p-4 rounded-xl backdrop-blur-md;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .title {
-  @apply text-xl font-bold text-indigo-200 tracking-wider mb-3 text-center;
+  @apply text-lg sm:text-xl font-bold text-indigo-200 tracking-wider mb-2 sm:mb-3 text-center;
 }
 
 .alarm-form {
-  @apply w-full bg-indigo-900/30 rounded-lg p-3 mb-3;
+  @apply w-full bg-indigo-900/30 rounded-lg p-2 sm:p-3 mb-3;
   border: 1px solid rgba(139, 92, 246, 0.2);
 }
 
@@ -176,8 +176,9 @@ onBeforeUnmount(() => {
 }
 
 .time-input {
-  @apply bg-indigo-800/70 text-white rounded text-center py-1 w-14 text-lg;
+  @apply bg-indigo-800/70 text-white rounded text-center py-2 sm:py-1 w-12 sm:w-14 text-base sm:text-lg;
   border: 1px solid rgba(139, 92, 246, 0.3);
+  min-height: 40px;
 }
 
 .time-picker span {
@@ -185,7 +186,7 @@ onBeforeUnmount(() => {
 }
 
 .add-button {
-  @apply bg-indigo-600 text-white rounded-lg p-2 ml-1;
+  @apply bg-indigo-600 text-white rounded-lg p-2 ml-1 h-10 w-10 flex items-center justify-center;
   transition: all 0.2s ease;
 }
 
@@ -198,26 +199,26 @@ onBeforeUnmount(() => {
 }
 
 .alarms-list ul {
-  @apply w-full;
+  @apply w-full space-y-2;
 }
 
 .alarm-item {
-  @apply flex justify-between items-center mb-2 p-2 rounded-lg w-full;
+  @apply flex justify-between items-center p-2 sm:p-3 rounded-lg w-full;
   background: rgba(30, 27, 75, 0.5);
   border: 1px solid rgba(139, 92, 246, 0.1);
 }
 
 .alarm-time {
-  @apply text-indigo-100 font-mono text-center;
+  @apply text-indigo-100 font-mono text-base sm:text-lg text-center;
 }
 
 .alarm-controls {
-  @apply flex gap-1;
+  @apply flex gap-1 sm:gap-2;
 }
 
 .toggle-button,
 .delete-button {
-  @apply p-1 rounded-full;
+  @apply p-2 rounded-full h-10 w-10 flex items-center justify-center;
   transition: all 0.2s ease;
 }
 
@@ -249,23 +250,23 @@ onBeforeUnmount(() => {
 }
 
 .alert-content {
-  @apply bg-gradient-to-br from-red-800 to-purple-900 text-white rounded-xl p-5 flex flex-col items-center;
+  @apply bg-gradient-to-br from-red-800 to-purple-900 text-white rounded-xl p-4 sm:p-5 flex flex-col items-center;
   border: 2px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
   animation: pulse 1s infinite alternate;
 }
 
 .alert-icon {
-  @apply text-4xl mb-2;
+  @apply text-3xl sm:text-4xl mb-2;
   animation: shake 0.5s infinite;
 }
 
 .alert-content h2 {
-  @apply text-2xl font-bold mb-3;
+  @apply text-xl sm:text-2xl font-bold mb-3;
 }
 
 .dismiss-button {
-  @apply bg-red-700 px-5 py-2 rounded-lg font-bold;
+  @apply bg-red-700 px-5 py-2 rounded-lg font-bold min-h-10 min-w-28;
 }
 
 /* Animations */

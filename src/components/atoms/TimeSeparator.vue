@@ -7,7 +7,7 @@
 <script setup lang="ts">
 interface Props {
   symbol?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 }
 
 withDefaults(defineProps<Props>(), {
@@ -19,6 +19,10 @@ withDefaults(defineProps<Props>(), {
 <style scoped>
 .time-separator {
   @apply text-indigo-400 font-mono flex items-center justify-center;
+}
+
+.xs {
+  @apply text-base;
 }
 
 .sm {

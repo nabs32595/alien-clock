@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useAlienClockStore } from '@/stores/alienClock'
 import Card from '@/components/molecules/Card.vue'
 import DefaultLayout from '@/components/layouts/DefaultLayout.vue'
@@ -294,49 +294,49 @@ onMounted(() => {
 
 <style scoped>
 .settings-view {
-  @apply min-h-screen flex items-center justify-center overflow-hidden relative p-3 w-full h-screen;
+  @apply min-h-screen flex items-start justify-center overflow-visible relative p-2 w-full pt-3;
 }
 
 .settings-container {
-  @apply flex flex-col w-full max-w-xl mx-auto overflow-y-auto;
+  @apply flex flex-col w-full max-w-xl mx-auto py-0;
   z-index: 1;
 }
 
 .title {
-  @apply text-2xl font-bold text-indigo-200 tracking-wider text-center mb-3;
+  @apply text-lg sm:text-2xl font-bold text-indigo-200 tracking-wider text-center mb-2 sm:mb-3;
   text-shadow: 0 0 15px rgba(165, 180, 252, 0.5);
 }
 
 .grid-layout {
-  @apply grid grid-cols-1 sm:grid-cols-2 gap-3;
+  @apply grid grid-cols-1 gap-1.5 sm:grid-cols-2 sm:gap-3;
 }
 
 .compact-card {
-  @apply p-3;
+  @apply p-1.5 sm:p-3;
 }
 
 .set-time-card {
-  @apply p-3;
+  @apply p-1.5 sm:p-3 mt-1.5 sm:mt-3;
 }
 
 .card-title {
-  @apply text-lg text-indigo-100 mb-2 font-semibold;
+  @apply text-sm sm:text-lg text-indigo-100 mb-0.5 sm:mb-2 font-semibold;
 }
 
 .mode-indicator {
-  @apply flex items-center gap-2;
+  @apply flex items-center gap-1 sm:gap-2;
 }
 
 .mode-label {
-  @apply text-indigo-300 font-medium text-sm;
+  @apply text-indigo-300 font-medium text-xs sm:text-sm;
 }
 
 .mode-value {
-  @apply font-bold text-sm;
+  @apply font-bold text-xs sm:text-sm;
 }
 
 .info-grid {
-  @apply grid grid-cols-2 gap-x-4 gap-y-1;
+  @apply grid grid-cols-2 gap-x-2 gap-y-0.5 sm:gap-y-1;
 }
 
 .info-item {
@@ -344,23 +344,23 @@ onMounted(() => {
 }
 
 .info-label {
-  @apply text-indigo-300 text-sm;
+  @apply text-indigo-300 text-xs;
 }
 
 .info-value {
-  @apply text-indigo-100 text-sm;
+  @apply text-indigo-100 text-xs;
 }
 
 .time-form {
-  @apply flex flex-col gap-3;
+  @apply flex flex-col gap-1.5 sm:gap-3;
 }
 
 .form-content {
-  @apply grid grid-cols-1 sm:grid-cols-2 gap-3;
+  @apply grid grid-cols-1 gap-1.5 sm:gap-3 sm:grid-cols-2;
 }
 
 .form-col {
-  @apply flex flex-col gap-2;
+  @apply flex flex-col gap-1.5 sm:gap-2;
 }
 
 .form-group {
@@ -368,40 +368,37 @@ onMounted(() => {
 }
 
 .form-group label {
-  @apply text-indigo-300 mb-1 text-sm flex items-center;
+  @apply text-indigo-300 mb-0.5 text-xs flex items-center;
 }
 
 .range-hint {
-  @apply text-indigo-400 text-xs ml-1;
+  @apply text-indigo-400 text-[10px] sm:text-xs ml-1;
 }
 
 .form-input {
-  @apply bg-indigo-800 text-indigo-100 rounded px-2 py-1 w-full focus:outline-none focus:ring-1 focus:ring-indigo-500 text-sm;
+  @apply bg-indigo-800 text-indigo-100 rounded px-2 py-1 w-full focus:outline-none focus:ring-1 focus:ring-indigo-500 text-xs sm:text-sm;
+  min-height: 32px;
 }
 
 .form-actions {
-  @apply flex gap-2 mt-2;
+  @apply flex gap-2 mt-1.5 sm:mt-2;
 }
 
 .submit-button {
-  @apply bg-indigo-600 text-white rounded px-3 py-1 hover:bg-indigo-500 transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500 text-sm;
+  @apply bg-indigo-600 text-white rounded px-3 py-1 hover:bg-indigo-500 transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500 text-xs sm:text-sm w-1/2;
+  min-height: 32px;
 }
 
 .reset-button {
-  @apply bg-indigo-800 text-white rounded px-3 py-1 hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500 text-sm;
+  @apply bg-indigo-800 text-white rounded px-3 py-1 hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500 text-xs sm:text-sm w-1/2;
+  min-height: 32px;
 }
 
 .error-message {
-  @apply bg-red-900/50 text-red-200 rounded p-2 mt-3 text-sm;
+  @apply bg-red-900/50 text-red-200 rounded p-1.5 mt-1.5 sm:mt-3 text-xs sm:text-sm;
 }
 
 .success-message {
-  @apply bg-green-900/50 text-green-200 rounded p-2 mt-3 text-sm;
-}
-
-@media (max-width: 640px) {
-  .info-grid {
-    @apply grid-cols-2;
-  }
+  @apply bg-green-900/50 text-green-200 rounded p-1.5 mt-1.5 sm:mt-3 text-xs sm:text-sm;
 }
 </style>

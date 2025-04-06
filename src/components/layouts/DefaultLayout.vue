@@ -1,7 +1,7 @@
 <template>
   <div class="layout-container">
     <!-- Space background component -->
-    <SpaceBackground />
+     <SpaceBackground />
 
     <!-- Main content area -->
     <div class="content-area">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import TimeUnit from '@/components/molecules/TimeUnit.vue'
 import TimeSeparator from '@/components/atoms/TimeSeparator.vue'
 import Card from '@/components/molecules/Card.vue'
@@ -59,15 +59,8 @@ const earthMonthName = computed(() => earthClockStore.monthName)
 onMounted(() => {
   alienClockStore.startClock()
   earthClockStore.startClock()
-
-  // Staggered animations
-  setTimeout(() => {
-    showTitle.value = true
-  }, 300)
-
-  setTimeout(() => {
-    showDateTime.value = true
-  }, 800)
+  showTitle.value = true
+  showDateTime.value = true
 })
 </script>
 

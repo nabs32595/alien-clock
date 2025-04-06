@@ -1,39 +1,50 @@
-# clock
+# Alien Clock
 
-This template should help get you started developing with Vue 3 in Vite.
+A Clock Applicationt that show an Alien Time and Earth Time
 
-## Recommended IDE Setup
+## Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Display Alien clock showing current date and time, updated every 1 Alien second
+- Allow users to set date and time with validated input
+- Display Earth's date and time based on the Alien's time
+- Allow users to set alarms
 
-## Type Support for `.vue` Imports in TS
+## Tech Stack
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- Vue 3 with Composition API
+- TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- Pinia for state management
+- Vue Router for navigation
 
-## Customize configuration
+## How to Run the Project
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+1. Clone the repository
+   ```sh
+   git clone https://github.com/nabs32595/alien-clock
+   cd alien-clock
+   ```
 
-## Project Setup
+2. Install dependencies
+   ```sh
+   npm install
+   ```
 
-```sh
-npm install
-```
+3. Start the development server
+   ```sh
+   npm run dev
+   ```
 
-### Compile and Hot-Reload for Development
+4. Open your browser and navigate to `http://localhost:5173` (or the URL shown in your terminal)
 
-```sh
-npm run dev
-```
+## Screenshots
+Home Screen
+![Alien Clock Interface](/images/home.gif)
 
-### Type-Check, Compile and Minify for Production
+Settings Screen
+![Time Setting Feature](/images/settings.gif)
 
-```sh
-npm run build
-```
+Alarm Screen
+![Alarm Feature](/images/alarm.gif)
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```

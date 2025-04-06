@@ -2,6 +2,9 @@
 
 A Clock Applicationt that show an Alien Time and Earth Time
 
+## Live Demo
+**[Alien Clock](https://alien-clock.netlify.app/)**
+
 ## Features
 
 - Display Alien clock showing current date and time, updated every 1 Alien second
